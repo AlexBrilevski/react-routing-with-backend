@@ -6,7 +6,7 @@ const EventDetailPage = () => {
   return (
     <>
       <h1>The Event Detail Page</h1>
-      <p>{params.eventId}</p>
+      <p>Event ID: {params.eventId}</p>
     </>
   );
 };

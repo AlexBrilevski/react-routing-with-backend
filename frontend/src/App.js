@@ -1,33 +1,33 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import RootLayout from './RootLayout';
+import RootLayout from './pages/RootLayout';
 import HomePage from './pages/HomePage';
-import EventsLayout from './EventsLayout';
+import EventsLayout from './pages/EventsLayout';
 import EventsPage from './pages/EventsPage';
 import EventDetailPage from './pages/EventDetailPage';
 import NewEventPage from './pages/NewEventPage';
 import EditEventPage from './pages/EditEventPage';
 
-function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <RootLayout />,
-      children: [
-        { index: true, element: <HomePage /> },
-        {
-          path: 'events',
-          element: <EventsLayout />,
-          children: [
-            { path: '', element: <EventsPage /> },
-            { path: ':eventId', element: <EventDetailPage /> },
-            { path: 'new', element: <NewEventPage /> },
-            { path: ':eventId/edit', element: <EditEventPage /> },
-          ]
-        },
-      ]
-    },
-  ]);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: 'events',
+        element: <EventsLayout />,
+        children: [
+          { path: '', element: <EventsPage /> },
+          { path: ':eventId', element: <EventDetailPage /> },
+          { path: 'new', element: <NewEventPage /> },
+          { path: ':eventId/edit', element: <EditEventPage /> },
+        ]
+      },
+    ]
+  },
+]);
 
+function App() {
   return <RouterProvider router={router} />;
 }
 
