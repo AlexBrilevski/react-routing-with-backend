@@ -1,7 +1,40 @@
+import { redirect } from "react-router-dom";
+import EventForm from "../components/EventForm";
+
 const NewEventPage = () => {
   return (
-    <h1>The NewEvent Page</h1>
+    <EventForm />
   );
+};
+
+export const newEventAction = async ({ request }) => {
+  const data = await request.formData();
+  const eventData = {
+    title: data.get('title'),
+    image: data.get('image'),
+    date: data.get('date'),
+    description: data.get('description'),
+  };
+
+  console.log(eventData);
+
+  const response = await fetch('http://localhost:8080/events', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(eventData),
+  });
+
+  console.log(response);
+
+  if (!response.ok) {
+    throw new Response(JSON.stringify({ message: 'Could not save an event.' }), {
+      status: 500,
+    });
+  }
+
+  return redirect('/events');
 };
 
 export default NewEventPage;
