@@ -16,8 +16,6 @@ export const newEventAction = async ({ request }) => {
     description: data.get('description'),
   };
 
-  console.log(eventData);
-
   const response = await fetch('http://localhost:8080/events', {
     method: 'POST',
     headers: {
@@ -25,8 +23,6 @@ export const newEventAction = async ({ request }) => {
     },
     body: JSON.stringify(eventData),
   });
-
-  console.log(response);
 
   if (!response.ok) {
     throw new Response(JSON.stringify({ message: 'Could not save an event.' }), {
